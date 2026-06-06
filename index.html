@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rasam Sanketh | Full Stack Developer Portfolio</title>
+  <meta name="description" content="Futuristic, interactive portfolio of Rasam Sanketh, featuring real-time simulations of Memory OS and AI neural networks, built using HTML, CSS, and JavaScript.">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Canvas Particle Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- DESKTOP HUD LAYOUT -->
+  <div class="desktop">
+    
+    <!-- Top System Bar -->
+    <div class="top-bar">
+      <div class="logo">
+        <i class="fa-solid fa-terminal"></i>
+        <span>SANKETH_HUD v1.0.0</span>
+      </div>
+      <div class="sys-info">
+        <span><i class="fa-solid fa-microchip"></i> CPU: <span id="cpu-load">12%</span></span>
+        <span><i class="fa-solid fa-memory"></i> RAM: <span id="ram-load">42%</span></span>
+        <span><span class="glow-dot"></span> CONNECTED</span>
+        <span id="sys-time">13:12:01</span>
+      </div>
+    </div>
+
+    <!-- Desktop Grid Workspace -->
+    <div class="workspace" id="desktop-workspace">
+      <!-- Shortcuts will be placed here -->
+      <div class="desktop-shortcut" data-app="profile">
+        <div class="icon-container">
+          <i class="fa-solid fa-user-astronaut"></i>
+        </div>
+        <div class="label">Profile.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="experience">
+        <div class="icon-container">
+          <i class="fa-solid fa-briefcase"></i>
+        </div>
+        <div class="label">Experience.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="projects">
+        <div class="icon-container">
+          <i class="fa-solid fa-code-fork"></i>
+        </div>
+        <div class="label">Projects.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="memory-os">
+        <div class="icon-container">
+          <i class="fa-solid fa-server"></i>
+        </div>
+        <div class="label">MemoryOS.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="ai-simulator">
+        <div class="icon-container">
+          <i class="fa-solid fa-brain"></i>
+        </div>
+        <div class="label">AISimulator.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="terminal">
+        <div class="icon-container">
+          <i class="fa-solid fa-terminal"></i>
+        </div>
+        <div class="label">Terminal.app</div>
+      </div>
+
+      <div class="desktop-shortcut" data-app="contact">
+        <div class="icon-container">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="label">Contact.app</div>
+      </div>
+    </div>
+
+    <!-- Desktop Dock -->
+    <div class="dock-container">
+      <div class="dock">
+        <div class="dock-item" data-app="profile">
+          <i class="fa-solid fa-user-astronaut"></i>
+          <span class="tooltip">Profile</span>
+        </div>
+        <div class="dock-item" data-app="experience">
+          <i class="fa-solid fa-briefcase"></i>
+          <span class="tooltip">Experience</span>
+        </div>
+        <div class="dock-item" data-app="projects">
+          <i class="fa-solid fa-code-fork"></i>
+          <span class="tooltip">Projects</span>
+        </div>
+        <div class="dock-item" data-app="memory-os">
+          <i class="fa-solid fa-server"></i>
+          <span class="tooltip">Memory OS</span>
+        </div>
+        <div class="dock-item" data-app="ai-simulator">
+          <i class="fa-solid fa-brain"></i>
+          <span class="tooltip">AI Simulator</span>
+        </div>
+        <div class="dock-item" data-app="terminal">
+          <i class="fa-solid fa-terminal"></i>
+          <span class="tooltip">Terminal</span>
+        </div>
+        <div class="dock-item" data-app="contact">
+          <i class="fa-solid fa-envelope"></i>
+          <span class="tooltip">Contact</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WINDOW TEMPLATE INSTANCES -->
+  
+  <!-- Profile Window -->
+  <div id="win-profile" class="window" style="width: 680px; height: 450px; top: 100px; left: 150px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-user-astronaut"></i>
+        <span>About Rasam Sanketh</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="profile"></button>
+        <button class="win-btn win-max" data-app="profile"></button>
+        <button class="win-btn win-close" data-app="profile"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="profile-grid">
+        <div class="profile-card">
+          <div class="avatar-container">
+            <img src="assets/profile.jpg" alt="Rasam Sanketh">
+          </div>
+          <h3>Rasam Sanketh</h3>
+          <p>Full Stack Developer</p>
+          <div class="social-links">
+            <a href="https://github.com/rasamsanketh" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/rasam-sanketh-53722381" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:rasamsanketh126@gmail.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+          <button class="mos-btn" onclick="window.open('assets/resume.png', '_blank')" style="margin-top: 10px; width: 100%; font-size: 11px; padding: 6px;">View Resume PDF</button>
+        </div>
+        <div class="profile-info">
+          <div>
+            <h3 class="section-title">Summary</h3>
+            <p class="bio-text">
+              Computer Science Engineering student (B.Tech 2026, Sreyas Institute of Engineering and Technology, CGPA: 8.4/10) with hands-on experience in full-stack web development. Passionate about systems architecture, simulation engines, and AI applications. Proven track record of developing functional applications and frameworks.
+            </p>
+          </div>
+          <div>
+            <h3 class="section-title">Technical Skills</h3>
+            <div class="skills-grid">
+              <div class="skill-category">
+                <h4>Languages</h4>
+                <div class="skill-list">
+                  <span class="skill-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
+                  <span class="skill-badge"><i class="fa-brands fa-python"></i> Python</span>
+                  <span class="skill-badge"><i class="fa-brands fa-java"></i> Java</span>
+                  <span class="skill-badge"><i class="fa-brands fa-php"></i> PHP</span>
+                </div>
+              </div>
+              <div class="skill-category">
+                <h4>Full Stack Stack</h4>
+                <div class="skill-list">
+                  <span class="skill-badge"><i class="fa-brands fa-react"></i> React.js</span>
+                  <span class="skill-badge"><i class="fa-brands fa-node-js"></i> Node.js</span>
+                  <span class="skill-badge"><i class="fa-solid fa-leaf"></i> MongoDB</span>
+                  <span class="skill-badge"><i class="fa-solid fa-database"></i> MySQL</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- Experience Window -->
+  <div id="win-experience" class="window" style="width: 650px; height: 400px; top: 120px; left: 200px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-briefcase"></i>
+        <span>Work Experience & Education</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="experience"></button>
+        <button class="win-btn win-max" data-app="experience"></button>
+        <button class="win-btn win-close" data-app="experience"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <h3 class="section-title">Professional History</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-role">Software Development Intern <span class="timeline-company">@ NeuroInkX</span></span>
+            <span class="timeline-duration">Aug 2025 – Nov 2025</span>
+          </div>
+          <ul class="timeline-desc">
+            <li>Developed and optimized dynamic web features using HTML5, CSS3, JavaScript, and React.js, improving page performance and user interaction.</li>
+            <li>Collaborated on UI/UX development, debugging, and testing to ensure code quality across multiple releases in an agile sprint environment.</li>
+            <li>Managed version control using Git/GitHub, participated in code reviews and agile sprint planning sessions.</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-role">Web Development Intern <span class="timeline-company">@ Cognifyz Technologies</span></span>
+            <span class="timeline-duration">2024</span>
+          </div>
+          <ul class="timeline-desc">
+            <li>Completed a structured internship covering front-end and back-end fundamentals, earning an industry-recognized certification.</li>
+          </ul>
+        </div>
+      </div>
+      
+      <h3 class="section-title" style="margin-top: 30px;">Education</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-role">B.Tech - Computer Science Engineering <span class="timeline-company">@ Sreyas Institute</span></span>
+            <span class="timeline-duration">2022 – 2026</span>
+          </div>
+          <div class="timeline-desc">
+            CGPA: 8.4/10. Focus on algorithms, operating systems, and full-stack software development.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <span class="timeline-role">Intermediate (MPC) <span class="timeline-company">@ Balapur Chaitanya Junior College</span></span>
+            <span class="timeline-duration">2021 – 2022</span>
+          </div>
+          <div class="timeline-desc">
+            Aggregated Score: 92%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- Projects Window -->
+  <div id="win-projects" class="window" style="width: 750px; height: 460px; top: 80px; left: 180px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-code-fork"></i>
+        <span>Projects Hub</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="projects"></button>
+        <button class="win-btn win-max" data-app="projects"></button>
+        <button class="win-btn win-close" data-app="projects"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <h3 class="section-title">Software Implementations</h3>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h4 class="project-title">Memory OS Simulator</h4>
+              <span class="project-badge-interactive">RUNNING IN PORTFOLIO</span>
+            </div>
+            <a class="project-link" onclick="openApp('memory-os')"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <p class="project-desc">A full in-browser simulator demonstrating memory management strategies (First-Fit, Best-Fit) with live process schedules, allocation grid grids, and a simulated JSON filesystem explorer.</p>
+          <div class="project-tags">
+            <span class="project-tag">Vanilla JS</span>
+            <span class="project-tag">OS Architecture</span>
+            <span class="project-tag">Data Structures</span>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-header">
+            <div>
+              <h4 class="project-title">AI Simulator Engine</h4>
+              <span class="project-badge-interactive">RUNNING IN PORTFOLIO</span>
+            </div>
+            <a class="project-link" onclick="openApp('ai-simulator')"><i class="fa-solid fa-play"></i></a>
+          </div>
+          <p class="project-desc">Interactive Multilayer Perceptron trainer using client-side backpropagation. Simulates live neural node weight lighting, decision boundary adjustments, and customizable activation functions.</p>
+          <div class="project-tags">
+            <span class="project-tag">HTML5 Canvas</span>
+            <span class="project-tag">Machine Learning</span>
+            <span class="project-tag">Backpropagation</span>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">IPL Score Prediction Web App</h4>
+            <a href="https://github.com/rasamsanketh/IPL-SCORE-PREDICTION" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="project-desc">A full-stack predictive ML application utilizing Python/Scikit-learn and React-based interface to deliver real-time run predictions and probability matrices with low API round-trips.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">Scikit-learn</span>
+            <span class="project-tag">React.js</span>
+            <span class="project-tag">REST API</span>
+          </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">Eventzy - Event Platform</h4>
+            <a href="https://github.com/rasamsanketh/EVENTZY" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="project-desc">Production-grade event scheduling and community host system utilizing responsive Node.js microservices, socket bindings, and MongoDB pipelines to coordinate bookings and notifications.</p>
+          <div class="project-tags">
+            <span class="project-tag">React.js</span>
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">MongoDB</span>
+            <span class="project-tag">Socket.io</span>
+          </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">Airline Reservation System</h4>
+            <span class="project-link"><i class="fa-solid fa-lock"></i></span>
+          </div>
+          <p class="project-desc">Simulated flight booking platform with transactional consistency across schedule changes, seat reservations, and user ticketing systems, fully built on relational MySQL schemas.</p>
+          <div class="project-tags">
+            <span class="project-tag">React.js</span>
+            <span class="project-tag">MySQL</span>
+            <span class="project-tag">Express.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- Memory OS Window -->
+  <div id="win-memory-os" class="window" style="width: 800px; height: 500px; top: 50px; left: 100px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-server"></i>
+        <span>Memory OS Simulation Manager</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="memory-os"></button>
+        <button class="win-btn win-max" data-app="memory-os"></button>
+        <button class="win-btn win-close" data-app="memory-os"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="memory-os-container">
+        <!-- Control Panel -->
+        <div class="mos-control-panel">
+          <h4 class="mos-label">Simulation Knobs</h4>
+          
+          <div class="mos-group">
+            <label class="mos-label">Allocation Strategy</label>
+            <select class="mos-select" id="mos-strategy">
+              <option value="first-fit">First-Fit (Fastest)</option>
+              <option value="best-fit">Best-Fit (Optimal Size)</option>
+              <option value="worst-fit">Worst-Fit (Largest Remain)</option>
+            </select>
+          </div>
+
+          <div class="mos-group">
+            <label class="mos-label">Spawn Process</label>
+            <input class="mos-input" type="text" id="mos-proc-name" placeholder="ProcName" value="P_Task">
+            <input class="mos-input" type="number" id="mos-proc-size" placeholder="Size (blocks: 1-16)" value="4" min="1" max="16">
+            <input class="mos-input" type="number" id="mos-proc-time" placeholder="Time (sec)" value="6" min="1" max="60">
+            <button class="mos-btn" id="mos-spawn-btn">Allocate Memory</button>
+          </div>
+
+          <div class="mos-group">
+            <button class="mos-btn secondary" id="mos-defrag-btn">Run Defragmentation</button>
+            <button class="mos-btn secondary" id="mos-reset-btn" style="border-color: var(--accent-pink); color: var(--accent-pink);">Reset OS Grid</button>
+          </div>
+        </div>
+
+        <!-- Live Visualizer -->
+        <div class="mos-visualizer">
+          <div>
+            <h4 class="section-title">Live RAM Map (128 Blocks)</h4>
+            <div class="mos-memory-header">
+              <span>Blocks: <span id="mos-allocated-count">16</span>/128 Allocated</span>
+              <span>Fragmentation: <span id="mos-fragmentation">0%</span></span>
+            </div>
+          </div>
+          <div class="mos-memory-grid" id="mos-grid">
+            <!-- Dynamically populated -->
+          </div>
+          
+          <!-- Running Processes table -->
+          <div class="mos-process-list-container">
+            <h4 class="mos-label" style="margin-bottom: 8px;">Active Process Control Block (PCB)</h4>
+            <table class="mos-process-table">
+              <thead>
+                <tr>
+                  <th>PID</th>
+                  <th>Name</th>
+                  <th>Blocks</th>
+                  <th>Address Range</th>
+                  <th>TTL</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="mos-pcb-list">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- AI Simulator Window -->
+  <div id="win-ai-simulator" class="window" style="width: 820px; height: 500px; top: 60px; left: 120px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-brain"></i>
+        <span>AI Neural Network Trainer</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="ai-simulator"></button>
+        <button class="win-btn win-max" data-app="ai-simulator"></button>
+        <button class="win-btn win-close" data-app="ai-simulator"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <div class="ai-simulator-container">
+        <!-- Controls Left -->
+        <div class="ai-controls">
+          <h4 class="mos-label">Network Hyperparameters</h4>
+          
+          <div class="mos-group">
+            <label class="mos-label">Dataset Pattern</label>
+            <select class="mos-select" id="ai-dataset">
+              <option value="xor">XOR Classification</option>
+              <option value="circle">Circular Area</option>
+              <option value="spiral">Spiral Cluster</option>
+            </select>
+          </div>
+
+          <div class="mos-group">
+            <label class="mos-label">Learning Rate (&eta;)</label>
+            <select class="mos-select" id="ai-lr">
+              <option value="0.03">0.03</option>
+              <option value="0.1" selected>0.10</option>
+              <option value="0.3">0.30</option>
+            </select>
+          </div>
+
+          <div class="mos-group">
+            <label class="mos-label">Activation Function</label>
+            <select class="mos-select" id="ai-activation">
+              <option value="tanh" selected>Hyperbolic Tangent (tanh)</option>
+              <option value="sigmoid">Sigmoid</option>
+              <option value="relu">ReLU</option>
+            </select>
+          </div>
+
+          <div class="mos-group" style="margin-top: 10px;">
+            <button class="mos-btn" id="ai-train-btn">Run Training Cycle</button>
+            <button class="mos-btn secondary" id="ai-stop-btn">Pause Train</button>
+            <button class="mos-btn secondary" id="ai-reset-btn">Reset Weights</button>
+          </div>
+        </div>
+
+        <!-- Visuals Right -->
+        <div class="ai-screen">
+          <div class="ai-canvas-wrapper">
+            <canvas id="ai-net-canvas"></canvas>
+          </div>
+          
+          <div class="ai-dashboard">
+            <div class="ai-card">
+              <div class="ai-card-title">Training Metrics</div>
+              <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                <div>
+                  <div style="font-size: 10px; color: var(--text-secondary);">Epochs</div>
+                  <div class="ai-stat" id="ai-epoch-val">0000</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; color: var(--text-secondary);">Loss Rate</div>
+                  <div class="ai-stat" id="ai-loss-val">0.000</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ai-card" style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="ai-card-title">Classification Map</div>
+                <div style="font-size: 10px; color: var(--text-secondary); max-width: 140px; line-height: 1.3;">Decision boundary plotted in real-time.</div>
+              </div>
+              <div class="ai-boundary-wrapper">
+                <canvas id="ai-boundary-canvas" width="100" height="100"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- Terminal Window -->
+  <div id="win-terminal" class="window terminal-window" style="width: 650px; height: 380px; top: 150px; left: 220px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-terminal"></i>
+        <span>Developer Terminal Shell</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="terminal"></button>
+        <button class="win-btn win-max" data-app="terminal"></button>
+        <button class="win-btn win-close" data-app="terminal"></button>
+      </div>
+    </div>
+    <div class="window-content" style="display: flex; flex-direction: column; justify-content: space-between; padding: 15px;">
+      <div class="terminal-history" id="term-history">
+        <!-- Initial printout -->
+      </div>
+      <div class="terminal-input-container">
+        <span class="terminal-prompt">sanketh@sys:~$</span>
+        <input type="text" class="terminal-input" id="term-input" autofocus autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+  <!-- Contact Window -->
+  <div id="win-contact" class="window" style="width: 500px; height: 380px; top: 180px; left: 250px; display: none;">
+    <div class="window-titlebar">
+      <div class="window-title">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Send Encrypted Message</span>
+      </div>
+      <div class="window-controls">
+        <button class="win-btn win-min" data-app="contact"></button>
+        <button class="win-btn win-max" data-app="contact"></button>
+        <button class="win-btn win-close" data-app="contact"></button>
+      </div>
+    </div>
+    <div class="window-content">
+      <h3 class="section-title">Communicate</h3>
+      <div class="contact-container">
+        <form class="contact-form" id="contact-form" onsubmit="event.preventDefault(); submitContactForm();">
+          <div class="contact-row">
+            <div class="contact-group">
+              <label>Full Name</label>
+              <input class="contact-input" type="text" id="contact-name" required placeholder="User Name">
+            </div>
+            <div class="contact-group">
+              <label>Email Address</label>
+              <input class="contact-input" type="email" id="contact-email" required placeholder="user@domain.com">
+            </div>
+          </div>
+          <div class="contact-group">
+            <label>Subject</label>
+            <input class="contact-input" type="text" id="contact-subject" required placeholder="Inquiry details">
+          </div>
+          <div class="contact-group">
+            <label>Message Content</label>
+            <textarea class="contact-textarea" id="contact-message" required placeholder="Write message..."></textarea>
+          </div>
+          <button class="contact-btn" type="submit">Transmit Transmission</button>
+          <div class="contact-status success" id="contact-status">Message transmitted successfully via mock SMTP client!</div>
+        </form>
+      </div>
+    </div>
+    <div class="resizer r"></div>
+    <div class="resizer b"></div>
+    <div class="resizer se"></div>
+  </div>
+
+
+  <!-- MOBILE PORTFOLIO SCROLLING BACKUP -->
+  <div class="mobile-portfolio">
+    <!-- Header -->
+    <div class="mob-header">
+      <div class="mob-avatar">
+        <img src="assets/profile.jpg" alt="Rasam Sanketh">
+      </div>
+      <h1 class="mob-name">Rasam Sanketh</h1>
+      <p class="mob-title">Full Stack Developer & Systems Designer</p>
+      
+      <div class="social-links" style="justify-content: center; margin-top: 15px;">
+        <a href="https://github.com/rasamsanketh" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+        <a href="https://linkedin.com/in/rasam-sanketh-53722381" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="mailto:rasamsanketh126@gmail.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="mob-section">
+      <h2 class="mob-title-section">Professional Summary</h2>
+      <p class="bio-text">
+        Computer Science Engineering student (B.Tech 2026, Sreyas Institute of Engineering and Technology, CGPA: 8.4/10) with hands-on experience in full-stack web development. Specializes in building modern web apps, system simulation logic, and lightweight AI architectures.
+      </p>
+      <button class="mos-btn" onclick="window.open('assets/resume.png', '_blank')" style="margin-top: 15px; width: 100%;">View Resume Details</button>
+    </div>
+
+    <!-- Skills -->
+    <div class="mob-section">
+      <h2 class="mob-title-section">Technical Skillset</h2>
+      <div class="skills-grid" style="grid-template-columns: 1fr;">
+        <div class="skill-category">
+          <h4 style="margin-bottom: 8px;">Languages</h4>
+          <div class="skill-list">
+            <span class="skill-badge"><i class="fa-brands fa-js"></i> JavaScript</span>
+            <span class="skill-badge"><i class="fa-brands fa-python"></i> Python</span>
+            <span class="skill-badge"><i class="fa-brands fa-java"></i> Java</span>
+            <span class="skill-badge"><i class="fa-brands fa-php"></i> PHP</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4 style="margin-bottom: 8px;">Front-End & Back-End</h4>
+          <div class="skill-list">
+            <span class="skill-badge"><i class="fa-brands fa-react"></i> React.js</span>
+            <span class="skill-badge"><i class="fa-brands fa-node-js"></i> Node.js</span>
+            <span class="skill-badge"><i class="fa-solid fa-leaf"></i> MongoDB</span>
+            <span class="skill-badge"><i class="fa-solid fa-database"></i> MySQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="mob-section">
+      <h2 class="mob-title-section">Featured Projects</h2>
+      <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 15px;">Note: Simulators run best on desktop. Please open this site on a laptop/desktop to interact with live simulations.</p>
+      <div class="projects-grid" style="grid-template-columns: 1fr;">
+        <div class="project-card">
+          <h4 class="project-title">Memory OS Simulator</h4>
+          <p class="project-desc">A simulator visualizer demonstrating RAM allocation models and active process block queues (PCB) directly inside custom pages.</p>
+          <div class="project-tags">
+            <span class="project-tag">Vanilla JS</span>
+            <span class="project-tag">System Models</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <h4 class="project-title">AI Neural Simulator</h4>
+          <p class="project-desc">Real-time classification neural network trainer with custom activation curves and boundary plotting canvas.</p>
+          <div class="project-tags">
+            <span class="project-tag">Neural Nets</span>
+            <span class="project-tag">Canvas</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">IPL Score Prediction</h4>
+            <a href="https://github.com/rasamsanketh/IPL-SCORE-PREDICTION" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="project-desc">ML predictor with Scikit-learn backend and dynamic interactive UI controls.</p>
+          <div class="project-tags">
+            <span class="project-tag">Python</span>
+            <span class="project-tag">React.js</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <h4 class="project-title">Eventzy - Platform</h4>
+            <a href="https://github.com/rasamsanketh/EVENTZY" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+          <p class="project-desc">Responsive event host board utilizing Node/MongoDB stack with live dashboard hooks.</p>
+          <div class="project-tags">
+            <span class="project-tag">React.js</span>
+            <span class="project-tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="mob-section">
+      <h2 class="mob-title-section">Work History</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-role">Software Development Intern <span class="timeline-company">@ NeuroInkX</span></div>
+          <div class="timeline-duration">Aug 2025 – Nov 2025</div>
+          <ul class="timeline-desc" style="margin-top: 5px;">
+            <li>Developed dynamic web features with React.js, improving load speeds.</li>
+            <li>Managed Git codebase branches, conducting code reviews and sprint tests.</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-role">Web Development Intern <span class="timeline-company">@ Cognifyz Technologies</span></div>
+          <div class="timeline-duration">2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="mob-section" style="margin-bottom: 80px;">
+      <h2 class="mob-title-section">Connect</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+        <input class="contact-input" type="text" placeholder="Name" required>
+        <input class="contact-input" type="email" placeholder="Email" required>
+        <textarea class="contact-textarea" placeholder="Message" required></textarea>
+        <button class="contact-btn" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/memory-os.js"></script>
+  <script src="js/ai-simulator.js"></script>
+
+  <script>
+    // System clock update
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+      const timeEl = document.getElementById('sys-time');
+      if (timeEl) timeEl.textContent = timeStr;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // CPU/RAM load mock fluctuation
+    setInterval(() => {
+      const cpu = Math.floor(Math.random() * 15) + 5;
+      const ram = Math.floor(Math.random() * 5) + 38;
+      const cpuEl = document.getElementById('cpu-load');
+      const ramEl = document.getElementById('ram-load');
+      if (cpuEl) cpuEl.textContent = `${cpu}%`;
+      if (ramEl) ramEl.textContent = `${ram}%`;
+    }, 3000);
+
+    // Contact form mock handling
+    function submitContactForm() {
+      const name = document.getElementById('contact-name').value;
+      const email = document.getElementById('contact-email').value;
+      const subject = document.getElementById('contact-subject').value;
+      const msg = document.getElementById('contact-message').value;
+      
+      const statusEl = document.getElementById('contact-status');
+      statusEl.style.display = 'block';
+      
+      setTimeout(() => {
+        document.getElementById('contact-form').reset();
+        setTimeout(() => {
+          statusEl.style.display = 'none';
+        }, 3000);
+      }, 500);
+    }
+  </script>
+</body>
+</html>
